@@ -1,5 +1,6 @@
 html {
     height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -18,6 +19,20 @@ body {
     align-items: center;
     height: 80vh;
     aspect-ratio: 0.6;
+    padding: 8px 0px;
+}
+
+p {
+    width: 100%;
+    height: 75%;
+    padding: 0px 1vh;
+    margin: 0px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 6vh;
 }
 
 .row {
@@ -37,7 +52,13 @@ body {
 
 button {
     flex: 1;
-    height: 80%;
+    height: 75%;
     background-color: rgb(100, 100, 100);
     color: white;
+    font-size: 4vh;
+    border-radius: 12px;
+}
+
+#equal {
+    flex-grow: 2.225;
 }
