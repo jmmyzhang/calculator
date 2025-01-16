@@ -51,6 +51,14 @@ frame.addEventListener("click", (e) => {
     }
 })
 
+frame.addEventListener("click", (e) => {
+    if (e.target.id == "ac") {
+        formula.n1 = "";
+        formula.n2 = "";
+        formula.operator = undefined;
+        newValueDisplay("");
+    }
+})
 
 function updateDisplay(input) {
     display.innerText += input;
