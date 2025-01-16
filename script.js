@@ -17,6 +17,9 @@ let equal = document.querySelector("#equal");
 
 frame.addEventListener("click", (e) => {
     if (e.target.classList == "num") {
+        if (formula.operator !== undefined && formula.n2 == "") {
+            newValueDisplay("");
+        }
         updateDisplay(e.target.id);
         if (formula.operator === undefined) {
             formula.n1 += e.target.id;
@@ -32,11 +35,7 @@ frame.addEventListener("click", (e) => {
             calculate(formula);
         }
         formula.operator = findOp(e.target.id);
-        if (formula.n2 == "") {
-            newValueDisplay("");
-        } else {
-            newValueDisplay(formula.n1);
-        }
+        newValueDisplay(formula.n1);
     }
 })
 
