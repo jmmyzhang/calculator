@@ -6,7 +6,7 @@ let divide = (a, b) => a / b;
 let formula = {
     n1: "",
     n2: "",
-    operator: add,
+    operator: undefined,
 }
 
 
@@ -18,7 +18,7 @@ let equal = document.querySelector("#equal");
 frame.addEventListener("click", (e) => {
     if (e.target.classList == "num") {
         updateDisplay(e.target.id);
-        if (formula.operator === "") {
+        if (formula.operator === undefined) {
             formula.n1 += e.target.id;
         } else {
             formula.n2 += e.target.id;
@@ -27,7 +27,28 @@ frame.addEventListener("click", (e) => {
 })
 
 frame.addEventListener("click", (e) => {
+    if (e.target.classList == "op") {
+        if (formula.n2 != "") {
+            calculate(formula);
+        }
+        formula.operator = findOp(e.target.id);
+        if (formula.n2 == "") {
+            newValueDisplay("");
+        } else {
+            newValueDisplay(formula.n1);
+        }
+    }
+})
 
+frame.addEventListener("click", (e) => {
+    if (e.target.id == "equal") {
+        if (formula.n1 == "" || formula.n2 == "" || formula.operator === undefined) {
+            return;
+        } else {
+            calculate(formula);
+            newValueDisplay(formula.n1);
+        }
+    }
 })
 
 
@@ -43,5 +64,17 @@ function calculate(f) {
     f.n1 = f.operator(parseInt(f.n1), parseInt(f.n2));
     f.n2 = "";
     f.operator = undefined;
-    newValueDisplay(f.n1);
+}
+
+function findOp(string) {
+    switch(string) {
+        case "add":
+            return add;
+        case "subtract":
+            return subtract;
+        case "multiply":
+            return multiply;
+        case "divide":
+            return divide;
+    }
 }
