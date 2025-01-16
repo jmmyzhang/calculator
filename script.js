@@ -40,5 +40,5 @@ function calculate(f) {
     f.n1 = f.op(parseInt(f.n1), parseInt(f.n2));
     f.n2 = "";
     f.op = undefined;
-    
+    newValueDisplay(f.n1);
 }
