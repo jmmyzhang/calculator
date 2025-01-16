@@ -31,6 +31,9 @@ frame.addEventListener("click", (e) => {
 
 frame.addEventListener("click", (e) => {
     if (e.target.classList == "op") {
+        if (formula.n1 == "") {
+            return;
+        }
         if (formula.n2 != "") {
             calculate(formula);
         }
@@ -68,6 +71,7 @@ function newValueDisplay(input) {
 }
 
 function calculate(f) {
+    if (formula.operator == divide && /^0+$/.test(formula.n2)) {}
     f.n1 = f.operator(parseInt(f.n1), parseInt(f.n2));
     f.n2 = "";
     f.operator = undefined;
