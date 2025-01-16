@@ -31,6 +31,13 @@ frame.addEventListener("click", (e) => {
 
 frame.addEventListener("click", (e) => {
     if (e.target.classList == "op") {
+        if (formula.operator == divide && /^0+/.test(formula.n2)) {
+            formula.n1 = "";
+            formula.n2 = "";
+            formula.operator = undefined;
+            newValueDisplay("");
+            alert("ERROR: ZERO DIVISION");
+        }
         if (formula.n1 == "") {
             return;
         }
@@ -46,6 +53,12 @@ frame.addEventListener("click", (e) => {
     if (e.target.id == "equal") {
         if (formula.n1 == "" || formula.n2 == "" || formula.operator === undefined) {
             return;
+        } else if (formula.operator == divide && /^0+$/.test(formula.n2)) {
+            formula.n1 = "";
+            formula.n2 = "";
+            formula.operator = undefined;
+            newValueDisplay("");
+            alert("ERROR: ZERO DIVISION");
         } else {
             calculate(formula);
             newValueDisplay(formula.n1);
