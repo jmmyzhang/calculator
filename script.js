@@ -2,6 +2,7 @@ let add = (a, b) => a + b;
 let subtract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
+let exp = (a, b) => a ** b;
 
 let formula = {
     n1: "",
@@ -76,6 +77,11 @@ frame.addEventListener("click", (e) => {
         formula.operator = undefined;
         newValueDisplay("");
     }
+    if (e.target.id == "c") {
+        if (formula.operator === undefined) formula.n1 = "";
+        else formula.n2 = "";
+        newValueDisplay("");
+    }
 })
 
 frame.addEventListener("click", (e) => {
@@ -128,5 +134,7 @@ function findOp(string) {
             return multiply;
         case "divide":
             return divide;
+        case "exp":
+            return exp;
     }
 }
