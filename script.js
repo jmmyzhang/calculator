@@ -102,7 +102,13 @@ function updateDisplay(input) {
 }
 
 function newValueDisplay(input) {
-    display.innerText = input;
+    if (input == "") display.innerText = input;
+    else {
+        let num = parseFloat(input);
+        let factor = Math.pow(10, 6);
+        let rounded = Math.round(num * factor) / factor;
+        display.innerText = rounded.toString();
+    }
 }
 
 function calculate(f) {
