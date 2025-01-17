@@ -38,9 +38,10 @@ frame.addEventListener("click", (e) => {
             newValueDisplay("");
             alert("ERROR: ZERO DIVISION");
         }
-        if (formula.n1 == "") {
-            return;
-        }
+        if (formula.n1 == "") return;
+        
+        if (formula.n1 == "." || formula.n2 == ".") return;
+
         if (formula.n2 != "") {
             calculate(formula);
         }
@@ -51,9 +52,11 @@ frame.addEventListener("click", (e) => {
 
 frame.addEventListener("click", (e) => {
     if (e.target.id == "equal") {
-        if (formula.n1 == "" || formula.n2 == "" || formula.operator === undefined) {
-            return;
-        } else if (formula.operator == divide && /^0+$/.test(formula.n2)) {
+        if (formula.n1 == "" || formula.n2 == "" || formula.operator === undefined) return;
+        
+        if (formula.n1 == "." || formula.n2 == ".") return;
+
+        if (formula.operator == divide && /^0+$/.test(formula.n2)) {
             formula.n1 = "";
             formula.n2 = "";
             formula.operator = undefined;
@@ -75,6 +78,25 @@ frame.addEventListener("click", (e) => {
     }
 })
 
+frame.addEventListener("click", (e) => {
+    if (e.target.id == "dot") {
+        if (formula.operator !== undefined && formula.n2 == "") {
+            newValueDisplay("");
+        }
+        if (formula.operator === undefined) {
+            if (!formula.n1.includes(".")) {
+                formula.n1 += ".";
+                updateDisplay(".");
+            }
+        } else {
+            if (!formula.n2.includes(".")) {
+                formula.n2 += ".";
+                updateDisplay(".");
+            }
+        }
+    }
+})
+
 function updateDisplay(input) {
     display.innerText += input;
 }
@@ -85,7 +107,7 @@ function newValueDisplay(input) {
 
 function calculate(f) {
     if (formula.operator == divide && /^0+$/.test(formula.n2)) {}
-    f.n1 = f.operator(parseInt(f.n1), parseInt(f.n2));
+    f.n1 = f.operator(parseFloat(f.n1), parseFloat(f.n2));
     f.n2 = "";
     f.operator = undefined;
 }
